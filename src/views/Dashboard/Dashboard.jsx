@@ -41,7 +41,7 @@ class Dashboard extends Component {
           token: this.cookie.get('token')
         },
         headers: {
-          'Access-Control-Allow-Headers': ' x-requested-with x-requested-by'
+          'Access-Control-Allow-Headers': ' x-requested-with'
         },
         dataType: 'text',
         success: function (data) {
@@ -109,7 +109,7 @@ class Dashboard extends Component {
           clientSet: true
         },
         headers: {
-          'Access-Control-Allow-Headers': ' x-requested-with x-requested-by'
+          'Access-Control-Allow-Headers': ' x-requested-with'
         },
         dataType: 'text',
         success: function (data, textStatus, xhr) {
