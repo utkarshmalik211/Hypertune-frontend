@@ -21,7 +21,7 @@ class Dashboard extends Component {
     this.projectListUpdated = this.projectListUpdated.bind(this);
     // this.handleLogout = this.handleLogout.bind(this);
     try {
-      this.socket = io('https://hypertune-backend.herokuapp.com:40520/', { 'transports': ['websocket'] });
+      this.socket = io('https://hypertune-backend.herokuapp.com/', { 'transports': ['websocket'] });
       this.socket.on('connect', timestamp => console.log("SocketConnected!"));
     } catch (e) {
       console.info("Network Down");
@@ -31,7 +31,7 @@ class Dashboard extends Component {
     window.sessionStorage.setItem("pname","rohs");
     window.sessionStorage.setItem("token", "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6I…TU2fQ.SmgurQ3GowE36emJg_cLg_gLsVIVP2xl4BqS8MV2ghY");
     
-    // this.socket = io('https://hypertune-backend.herokuapp.com:40520/',{'transports': ['websocket']});
+    // this.socket = io('https://hypertune-backend.herokuapp.com/',{'transports': ['websocket']});
     this.state = {
       _notificationSystem: null,
       isLoggedIn: false,
