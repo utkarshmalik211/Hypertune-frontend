@@ -98,7 +98,7 @@ class ProjectModal extends Component {
       headers: {
         'Access-Control-Allow-Headers': ' x-requested-with'
       },
-      dataType: 'text',
+      dataType: 'jsonp',
       success: function (data, textStatus, xhr) {
         console.log(xhr.status);
         if (xhr.status === 200) {
@@ -120,7 +120,7 @@ class ProjectModal extends Component {
       headers: {
         'Access-Control-Allow-Headers': ' x-requested-with'
       },
-      dataType: 'text',
+      dataType: 'jsonp',
       success: function (data, textStatus, xhr) {
         data = JSON.parse(data);
         if (data === []) {
@@ -145,7 +145,7 @@ class ProjectModal extends Component {
         headers: {
           'Access-Control-Allow-Headers': ' x-requested-with'
         },
-        dataType: 'text',
+        dataType: 'jsonp',
         success: function (data, textStatus, xhr) {
           console.log(xhr.status);
           if (xhr.status === 200) {

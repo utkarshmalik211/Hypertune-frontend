@@ -41,7 +41,7 @@ class Login extends Component {
       headers: {
         'Access-Control-Allow-Headers': ' x-requested-with'
       },
-      dataType: 'text',
+      dataType: 'jsonp',
       success: function (data) {
         try {
           data = JSON.parse(data);
@@ -74,7 +74,7 @@ class Login extends Component {
       headers: {
         'Access-Control-Allow-Headers': ' x-requested-with'
       },
-      dataType: 'text',
+      dataType: 'jsonp',
       success: function (data) {
         try {
           data = JSON.parse(data);

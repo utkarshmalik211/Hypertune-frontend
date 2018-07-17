@@ -43,7 +43,7 @@ class Dashboard extends Component {
         headers: {
           'Access-Control-Allow-Headers': ' x-requested-with'
         },
-        dataType: 'text',
+        dataType: 'jsonp',
         success: function (data) {
           const variables = {};
           data = JSON.parse(data);
@@ -111,7 +111,7 @@ class Dashboard extends Component {
         headers: {
           'Access-Control-Allow-Headers': ' x-requested-with'
         },
-        dataType: 'text',
+        dataType: 'jsonp',
         success: function (data, textStatus, xhr) {
           if (xhr.status === 200) {
             console.info(data.message);
