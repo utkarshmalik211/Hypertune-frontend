@@ -88,7 +88,7 @@ class ProjectModal extends Component {
   deleteProject(event, pname, token) {
     event.preventDefault();
     $.ajax({
-      url: "http://localhost:1337/deleteProject",
+      url: "https://hypertune-backend.herokuapp.com:40520/deleteProject",
       type: 'post',
       data: {
         token: token,
@@ -112,7 +112,7 @@ class ProjectModal extends Component {
   }
   getProjects() {
     $.ajax({
-      url: "http://localhost:1337/findProjects",
+      url: "https://hypertune-backend.herokuapp.com:40520/findProjects",
       type: 'post',
       data: {
         email: this.cookie.get('email')
@@ -136,7 +136,7 @@ class ProjectModal extends Component {
     if (this.state.value !== undefined && this.state.value !== '') {
       const pname = this.state.value;
       $.ajax({
-        url: "http://localhost:1337/createProject",
+        url: "https://hypertune-backend.herokuapp.com:40520/createProject",
         type: 'post',
         data: {
           email: this.cookie.get('email'),
