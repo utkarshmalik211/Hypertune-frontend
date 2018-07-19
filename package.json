@@ -29,5 +29,24 @@
     "build": "npm run build-css && react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
+  },
+  "proxy": {
+    "/api": {
+      "target": "https://hypertune-backend.herokuapp.com",
+      "ssl": true,
+      "secure": false,
+      "pathRewrite": {
+        "^/api": "/"
+      }
+    },
+    "/socket.io":{
+        "target": "https://hypertune-backend.herokuapp.com",
+        "secure": false,
+        "ssl":true,
+        "ws": true,
+        "pathRewrite": {
+          "^/socket.io/": "/socket.io/"
+        }
+    }
   }
 }

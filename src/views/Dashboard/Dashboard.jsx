@@ -34,24 +34,25 @@ class Dashboard extends Component {
   updateData() {
     try {
       $.ajax({
-        url: "https://hypertune-backend.herokuapp.com/getData",
+        url: "/api/getData",
         type: 'post',
         data: {
           pname: this.cookie.get('pname'),
           token: this.cookie.get('token')
         },
         headers: {
-          'Access-Control-Allow-Headers': ' x-requested-with'
+          "Access-Control-Allow-Origin": '*', "Access-Control-Allow-Methods": 'POST,GET,PUT,DELETE', 'Access-Control-Allow-Headers': 'Authorization, Lang'
         },
-        dataType: 'jsonp',
+        dataType: 'text',
         success: function (data) {
           const variables = {};
           data = JSON.parse(data);
+          // console.log(data);
           try {
             for (const i in data.data.variables) {
               if (data.data.variables[i]) {
                 variables[i] = data.data.variables[i];
-                console.log(variables[i]);
+                // console.log(variables[i]);
               }
             }
             this.setState({ data: variables });
@@ -68,14 +69,18 @@ class Dashboard extends Component {
   componentDidMount() {
     try {
       this.socket.on('data', data => {
-        console.log(data);
         this.setState({ data: JSON.parse(data.variables) });
       });
     } catch (e) {
       this.setState({ data: { "No": "Network" } });
     }
+    this.setState({ projectDetails: this.props.project }, () => { this.updateData.bind(this) });
     this.updateData();
   }
+
+  // componentWillUpdate(){
+  //   this.updateData();
+  // }
 
   createLegend(json) {
     var legend = [];
@@ -89,39 +94,34 @@ class Dashboard extends Component {
   }
   handleUpdate(varName, value) {
     const oldVars = this.state.data;
-    console.log(varName, value);
     oldVars[varName] = value;
-    if (this.varChange(oldVars)) {
-      this.setState({ data: oldVars });
-    } else {
-      console.error("Error in transaction!");
-    }
+    // console.log(oldVars);
+    this.varChange(oldVars);
+    this.setState({ data: oldVars });
+
   }
   varChange(varArray) {
     try {
+      // console.log(this.cookie.get('pname'),this.cookie.get('token'),varArray);
       $.ajax({
-        url: "https://hypertune-backend.herokuapp.com/addvardata",
+        url: "/api/addvardata",
         type: 'post',
         data: {
           pname: this.cookie.get('pname'),
           token: this.cookie.get('token'),
-          variables: varArray,
+          variables: JSON.stringify(varArray),
           clientSet: true
         },
         headers: {
-          'Access-Control-Allow-Headers': ' x-requested-with'
+          "Access-Control-Allow-Origin": '*', "Access-Control-Allow-Methods": 'POST,GET,PUT,DELETE', 'Access-Control-Allow-Headers': 'Authorization, Lang'
         },
-        dataType: 'jsonp',
-        success: function (data, textStatus, xhr) {
-          if (xhr.status === 200) {
-            console.info(data.message);
-            return true;
-          }
-          return false;
+        dataType: 'text',
+        success: function (data) {
+          return true;
         },
       });
     } catch (e) {
-      console.error (e);
+      console.error(e);
       return false;
     }
   }

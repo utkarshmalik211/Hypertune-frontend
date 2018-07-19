@@ -88,7 +88,7 @@ class ProjectModal extends Component {
   deleteProject(event, pname, token) {
     event.preventDefault();
     $.ajax({
-      url: "https://hypertune-backend.herokuapp.com/deleteProject",
+      url: "/api/deleteProject",
       type: 'post',
       data: {
         token: token,
@@ -96,9 +96,9 @@ class ProjectModal extends Component {
         email: this.cookie.get('email'),
       },
       headers: {
-        'Access-Control-Allow-Headers': ' x-requested-with'
+        "Access-Control-Allow-Origin": '*',         "Access-Control-Allow-Methods": 'POST,GET,PUT,DELETE',         'Access-Control-Allow-Headers': 'Authorization, Lang'    
       },
-      dataType: 'jsonp',
+      dataType: 'text',
       success: function (data, textStatus, xhr) {
         console.log(xhr.status);
         if (xhr.status === 200) {
@@ -112,22 +112,22 @@ class ProjectModal extends Component {
   }
   getProjects() {
     $.ajax({
-      url: "https://hypertune-backend.herokuapp.com/findProjects",
+      url: "/api/findProjects",
       type: 'post',
       data: {
         email: this.cookie.get('email')
       },
       headers: {
-        'Access-Control-Allow-Headers': ' x-requested-with'
+        "Access-Control-Allow-Origin": '*',         "Access-Control-Allow-Methods": 'POST,GET,PUT,DELETE',         'Access-Control-Allow-Headers': 'Authorization, Lang'    
       },
-      dataType: 'jsonp',
+      dataType: 'text',
       success: function (data, textStatus, xhr) {
         data = JSON.parse(data);
         if (data === []) {
           this.showNotification(4, "User "+this.cookie.get('email')+" has no projects");
         } else {
           this.setState({ projects: data });
-          console.log(this.state.projects);
+          // console.log(this.state.projects);
         }
       }.bind(this),
     });
@@ -136,16 +136,16 @@ class ProjectModal extends Component {
     if (this.state.value !== undefined && this.state.value !== '') {
       const pname = this.state.value;
       $.ajax({
-        url: "https://hypertune-backend.herokuapp.com/createProject",
+        url: "/api/createProject",
         type: 'post',
         data: {
           email: this.cookie.get('email'),
           pname: pname
         },
         headers: {
-          'Access-Control-Allow-Headers': ' x-requested-with'
+          "Access-Control-Allow-Origin": '*',         "Access-Control-Allow-Methods": 'POST,GET,PUT,DELETE',         'Access-Control-Allow-Headers': 'Authorization, Lang'    
         },
-        dataType: 'jsonp',
+        dataType: 'text',
         success: function (data, textStatus, xhr) {
           console.log(xhr.status);
           if (xhr.status === 200) {
@@ -175,9 +175,10 @@ class ProjectModal extends Component {
     this.cookie.set('token',token);
     this.socketRoom = pname + "_" +this.cookie.get("email");
     this.socket.emit('room', this.socketRoom);
-    this.props.projectsupdated(this.state.projects);
+    console.log(typeof this.props.projectsUpdated);
+    this.props.projectsUpdated(this.state.projects);
     console.info("Socket Joined Room: ", this.socketRoom);
-    // this.handleClose();
+    this.handleClose();
   }
 
   handleClose() {
@@ -202,10 +203,10 @@ class ProjectModal extends Component {
 
         <Modal show={this.state.show} onHide={this.handleClose}>
           <Modal.Header closeButton>
-            <Modal.Title>Project Selection</Modal.Title>
+            <Modal.Title><center>Project Selection</center></Modal.Title>
           </Modal.Header>
           <Modal.Body>
-            <h4>Projects</h4>
+            <p>Click on project to select it.</p>
             <Table hover responsive>
               <thead>
                 <tr>

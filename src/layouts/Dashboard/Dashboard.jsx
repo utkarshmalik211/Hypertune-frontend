@@ -21,7 +21,7 @@ class Dashboard extends Component {
     this.projectListUpdated = this.projectListUpdated.bind(this);
     // this.handleLogout = this.handleLogout.bind(this);
     try {
-      this.socket = io('https://hypertune-backend.herokuapp.com/', { 'transports': ['websocket'] });
+      this.socket = io('//', { 'transports': ['websocket'] });
       this.socket.on('connect', timestamp => console.log("SocketConnected!"));
     } catch (e) {
       console.info("Network Down");
@@ -31,7 +31,7 @@ class Dashboard extends Component {
     window.sessionStorage.setItem("pname","rohs");
     window.sessionStorage.setItem("token", "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6I…TU2fQ.SmgurQ3GowE36emJg_cLg_gLsVIVP2xl4BqS8MV2ghY");
     
-    // this.socket = io('https://hypertune-backend.herokuapp.com/',{'transports': ['websocket']});
+    // this.socket = io('//',{'transports': ['websocket']});
     this.state = {
       _notificationSystem: null,
       isLoggedIn: false,
@@ -39,6 +39,7 @@ class Dashboard extends Component {
 
   }
   projectListUpdated(project){
+    console.log('This should update my children!');
     this.setState({projects: project});
   }
   loginStateChange(val) {
@@ -153,9 +154,9 @@ class Dashboard extends Component {
       element =
         <div className="wrapper">
           <NotificationSystem ref="notificationSystem" style={style} />
-          <Sidebar {...this.props} socket={this.socket} cookie={this.cookies}/>
+          <Sidebar {...this.props} socket={this.socket} projectupdate = {this.projectListUpdated} cookie={this.cookies}/>
           <div id="main-panel" className="main-panel" ref="mainPanel">
-            <Header {...this.props} isLoggedIn={isLoggedIn} projectupdate = {this.projectListUpdated} cookies={this.cookies } loginStateChange={this.loginStateChange}/>
+            <Header {...this.props} isLoggedIn={isLoggedIn}  cookies={this.cookies } loginStateChange={this.loginStateChange}/>
             <Switch>
               {dashboardRoutes.map((prop, key) => {
                 if (prop.name === "Notifications")
@@ -178,6 +179,7 @@ class Dashboard extends Component {
                     <prop.component
                       {...routeProps}
                       handleClick={this.handleNotificationClick}
+                      project = {this.state.projects}
                       socket = {this.socket}
                       cookies={this.cookies }
                   />)} key={key} />

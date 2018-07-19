@@ -32,16 +32,16 @@ class Login extends Component {
   register() {
     console.log('register pressed');
     $.ajax({
-      url: "https://hypertune-backend.herokuapp.com/user",
+      url: "/api/user",
       type: 'post',
       data: {
         email: this.state.email,
         password: this.state.password
       },
       headers: {
-        'Access-Control-Allow-Headers': ' x-requested-with'
+        "Access-Control-Allow-Origin": '*',         "Access-Control-Allow-Methods": 'POST,GET,PUT,DELETE',         'Access-Control-Allow-Headers': 'Authorization, Lang'    
       },
-      dataType: 'jsonp',
+      dataType: 'text',
       success: function (data) {
         try {
           data = JSON.parse(data);
@@ -65,16 +65,17 @@ class Login extends Component {
     window.sessionStorage.setItem("isLoggedIn", true);
 
     $.ajax({
-      url: "https://hypertune-backend.herokuapp.com/login",
+      url: "/api/login",
       type: 'post',
       data: {
         email: this.state.email,
         password: this.state.password
       },
       headers: {
-        'Access-Control-Allow-Headers': ' x-requested-with'
-      },
-      dataType: 'jsonp',
+        "Access-Control-Allow-Origin": '*',
+        "Access-Control-Allow-Methods": 'POST,GET,PUT,DELETE',
+        'Access-Control-Allow-Headers': 'Authorization, Lang'      },
+      dataType: 'text',
       success: function (data) {
         try {
           data = JSON.parse(data);

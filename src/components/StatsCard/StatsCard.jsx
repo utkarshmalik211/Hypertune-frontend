@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Row, Col, FormControl, Button } from "react-bootstrap";
+import { Row, Col, Form, FormControl, Button } from "react-bootstrap";
 
 export class StatsCard extends Component {
   constructor(props) {
@@ -10,31 +10,39 @@ export class StatsCard extends Component {
       value: ''
     };
   }
-  handleChange(e) {
-    this.setState({ value: e.target.value });
+  handleChange = event => {
+    // event.preventDefault();
+    this.setState({ value: event.target.value });
+  }
+  handleSubmit = event => {
+    event.preventDefault();
+    this.handleUpdate(this.props.statsText, this.state.value);
   }
   render() {
-    const Edit = () => {
-      if (this.props.edit === true) {
-        return (
-          <Row>
-            <Col xs={8}>
-              <FormControl
-                type="text"
-                placeholder="New Value"
-                value={this.state.value}
-                onChange={this.handleChange}
-              />
-            </Col>
-            <Col xs={4}>
-              <Button block className="pull-right" bsStyle="warning" onClick={() => { this.handleUpdate(this.props.statsText, this.state.value) }}>Set</Button>
-            </Col>
-          </Row>
-        )
-      } else {
-        return null;
-      }
-    };
+    const InputForm = ({stateVal,changeFunc}) => <FormControl
+      type="text"
+      placeholder="New Value"
+      value={stateVal}
+      onChange={changeFunc}
+    />;
+    // const Edit = () => {
+    //   if (this.props.edit === true) {
+    //     return (
+    //       <Form onSubmit={this.handleSubmit}>
+    //         <Row>
+    //           <Col xs={8}>
+    //           {InputForm({stateVal: this.state.value,changeFunc: this.handleChange})}
+    //           </Col>
+    //           <Col xs={4}>
+    //             <Button block className="pull-right" bsStyle="warning" type="submit">Set</Button>
+    //           </Col>
+    //         </Row>
+    //       </Form>
+    //     )
+    //   } else {
+    //     return null;
+    //   }
+    // };
     return (
       <div className="card card-stats">
         <div className="content">
@@ -51,7 +59,16 @@ export class StatsCard extends Component {
               </div>
             </Col>
           </Row>
-          <Edit />
+          <Form onSubmit={this.handleSubmit}>
+            <Row>
+              <Col xs={8}>
+              {InputForm({stateVal: this.state.value,changeFunc: this.handleChange})}
+              </Col>
+              <Col xs={4}>
+                <Button block className="pull-right" bsStyle="warning" type="submit">Set</Button>
+              </Col>
+            </Row>
+          </Form>
           <div className="footer">
             <hr />
             <div className="stats">
