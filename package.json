@@ -32,18 +32,16 @@
   },
   "proxy": {
     "/api": {
-      "target": "https://hypertune-backend.herokuapp.com",
-      "ssl": true,
+      "target": "http://hypertune-backend.herokuapp.com",
       "secure": false,
       "pathRewrite": {
         "^/api": "/"
       }
     },
     "/socket.io":{
-        "target": "https://hypertune-backend.herokuapp.com",
-        "secure": false,
-        "ssl":true,
+        "target": "http://hypertune-backend.herokuapp.com",
         "ws": true,
+        "secure": false,
         "pathRewrite": {
           "^/socket.io/": "/socket.io/"
         }
