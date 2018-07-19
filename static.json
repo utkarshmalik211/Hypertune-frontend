@@ -5,5 +5,11 @@
       "Access-Control-Allow-Origin": "*"
     }
   },
-  "https_only": true
+  "https_only": true,
+  "proxies": {
+    "/api/": {
+      "origin": "https://hypertune-backend.herokuapp.com/"
+    }
+  }
+}
 }
