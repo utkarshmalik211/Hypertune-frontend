@@ -32,7 +32,7 @@ class Login extends Component {
   register() {
     console.log('register pressed');
     $.ajax({
-      url: "/api/user",
+      url: "https://hypertune-backend.herokuapp.com/user",
       type: 'post',
       data: {
         email: this.state.email,
@@ -65,7 +65,7 @@ class Login extends Component {
     window.sessionStorage.setItem("isLoggedIn", true);
 
     $.ajax({
-      url: "/api/login",
+      url: "https://hypertune-backend.herokuapp.com/login",
       type: 'post',
       data: {
         email: this.state.email,

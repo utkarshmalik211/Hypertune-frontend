@@ -1,10 +1,7 @@
 {
-  "proxies": {
-    "/api/": {
-      "origin": "https://${API_APP_NAME}.herokuapp.com/"
-    },
-    "/socket.io/":{
-      "origin": "https://${API_APP_NAME}.herokuapp.com/"
+  "headers": {
+    "/**": {
+      "Access-Control-Allow-Origin": "*"
     }
   }
 }

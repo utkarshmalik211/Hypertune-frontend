@@ -21,7 +21,7 @@ class Dashboard extends Component {
     this.projectListUpdated = this.projectListUpdated.bind(this);
     // this.handleLogout = this.handleLogout.bind(this);
     try {
-      this.socket = io('/', { 'transports': ['websocket'] });
+      this.socket = io('https://hypertune-backend.herokuapp.com', { 'transports': ['websocket'] });
       this.socket.on('connect', timestamp => console.log("SocketConnected!"));
     } catch (e) {
       console.info("Network Down");

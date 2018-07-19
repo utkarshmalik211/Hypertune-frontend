@@ -34,7 +34,7 @@ class Dashboard extends Component {
   updateData() {
     try {
       $.ajax({
-        url: "/api/getData",
+        url: "https://hypertune-backend.herokuapp.com/getData",
         type: 'post',
         data: {
           pname: this.cookie.get('pname'),
@@ -104,7 +104,7 @@ class Dashboard extends Component {
     try {
       // console.log(this.cookie.get('pname'),this.cookie.get('token'),varArray);
       $.ajax({
-        url: "/api/addvardata",
+        url: "https://hypertune-backend.herokuapp.com/addvardata",
         type: 'post',
         data: {
           pname: this.cookie.get('pname'),
