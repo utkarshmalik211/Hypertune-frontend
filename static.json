@@ -1,10 +1,5 @@
 {
   "root": "build/",
-  "headers": {
-    "/**": {
-      "Access-Control-Allow-Origin": "*"
-    }
-  },
   "https_only": true,
   "proxies": {
     "/api/": {
