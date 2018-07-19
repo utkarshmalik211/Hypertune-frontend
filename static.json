@@ -2,8 +2,8 @@
   "root": "build/",
   "https_only": true,
   "proxies": {
-    "/api/": {
-      "origin": "https://hypertune-backend.herokuapp.com/"
+    "/api/login": {
+      "origin": "https://hypertune-backend.herokuapp.com/login"
     }
   }
 }
