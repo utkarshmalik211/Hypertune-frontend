@@ -96,7 +96,7 @@ class ProjectModal extends Component {
         email: this.cookie.get('email'),
       },
       headers: {
-        "Access-Control-Allow-Origin": '*',         "Access-Control-Allow-Methods": 'POST,GET,PUT,DELETE',         'Access-Control-Allow-Headers': 'Authorization, Lang'    
+        
       },
       dataType: 'text',
       success: function (data, textStatus, xhr) {
@@ -118,7 +118,7 @@ class ProjectModal extends Component {
         email: this.cookie.get('email')
       },
       headers: {
-        "Access-Control-Allow-Origin": '*',         "Access-Control-Allow-Methods": 'POST,GET,PUT,DELETE',         'Access-Control-Allow-Headers': 'Authorization, Lang'    
+        
       },
       dataType: 'text',
       success: function (data, textStatus, xhr) {
@@ -143,7 +143,7 @@ class ProjectModal extends Component {
           pname: pname
         },
         headers: {
-          "Access-Control-Allow-Origin": '*',         "Access-Control-Allow-Methods": 'POST,GET,PUT,DELETE',         'Access-Control-Allow-Headers': 'Authorization, Lang'    
+          
         },
         dataType: 'text',
         success: function (data, textStatus, xhr) {

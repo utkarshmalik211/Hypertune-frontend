@@ -32,14 +32,14 @@
   },
   "proxy": {
     "/api": {
-      "target": "http://hypertune-backend.herokuapp.com",
+      "target": "http://localhost:1337",
       "secure": false,
       "pathRewrite": {
         "^/api": "/"
       }
     },
     "/socket.io":{
-        "target": "http://hypertune-backend.herokuapp.com",
+        "target": "http://localhost:1337",
         "ws": true,
         "secure": false,
         "pathRewrite": {

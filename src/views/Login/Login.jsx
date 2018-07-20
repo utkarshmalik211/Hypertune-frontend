@@ -39,7 +39,7 @@ class Login extends Component {
         password: this.state.password
       },
       headers: {
-        "Access-Control-Allow-Origin": '*',         "Access-Control-Allow-Methods": 'POST,GET,PUT,DELETE',         'Access-Control-Allow-Headers': 'Authorization, Lang'    
+        
       },
       dataType: 'text',
       success: function (data) {
