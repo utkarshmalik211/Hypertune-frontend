@@ -63,7 +63,7 @@ class Login extends Component {
         try {
           console.log(data);
           // data = JSON.parse(data);
-          if (data.userDetails) {
+          if (data.data.userDetails) {
             this.cookies.set('email', data.data.userDetails.email, { path: '/' });
             this.cookies.set('loggedIn', true, { path: '/' });
 

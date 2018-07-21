@@ -7,6 +7,9 @@
   "proxies": {
     "/api/": {
       "origin": "https://hypertune-backend.herokuapp.com/"
+    },
+    "/socket.io/":{
+      "origin": "https://hypertune-backend.herokuapp.com/socket.io/"
     }
   },
   "headers": {
