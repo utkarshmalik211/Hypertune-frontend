@@ -90,15 +90,15 @@ class ProjectModal extends Component {
     $.ajax({
       url: "/api/deleteProject",
       type: 'post',
-      data: {
+      data: JSON.stringify({
         token: token,
         pname: pname,
         email: this.cookie.get('email'),
-      },
-      headers: {
+      }),
+      //  //  headers: {
         
-      },
-      dataType: 'text',
+      // },
+      dataType: 'json',
       success: function (data, textStatus, xhr) {
         console.log(xhr.status);
         if (xhr.status === 200) {
@@ -114,13 +114,13 @@ class ProjectModal extends Component {
     $.ajax({
       url: "/api/findProjects",
       type: 'post',
-      data: {
+      data: JSON.stringify({
         email: this.cookie.get('email')
-      },
-      headers: {
+      }),
+      //  //  headers: {
         
-      },
-      dataType: 'text',
+      // },
+      dataType: 'json',
       success: function (data, textStatus, xhr) {
         data = JSON.parse(data);
         if (data === []) {
@@ -138,14 +138,14 @@ class ProjectModal extends Component {
       $.ajax({
         url: "/api/createProject",
         type: 'post',
-        data: {
+        data: JSON.stringify({
           email: this.cookie.get('email'),
           pname: pname
-        },
-        headers: {
+        }),
+        //  //  headers: {
           
-        },
-        dataType: 'text',
+        // },
+        dataType: 'json',
         success: function (data, textStatus, xhr) {
           console.log(xhr.status);
           if (xhr.status === 200) {

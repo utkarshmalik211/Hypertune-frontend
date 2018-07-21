@@ -1,12 +1,11 @@
 import React, { Component } from "react";
 import ChartistGraph from "react-chartist";
 import { Grid, Row, Col } from "react-bootstrap";
-import $ from 'jquery';
+import axios from 'axios';
 import { Card } from "components/Card/Card.jsx";
 import { StatsCard } from "components/StatsCard/StatsCard.jsx";
 import { Tasks } from "components/Tasks/Tasks.jsx";
 import NotificationSystem from "react-notification-system";
-
 import {
   dataSales,
   optionsSales,
@@ -33,18 +32,12 @@ class Dashboard extends Component {
   }
   updateData() {
     try {
-      $.ajax({
-        url: "/api/getData",
-        type: 'post',
-        data: {
-          pname: this.cookie.get('pname'),
-          token: this.cookie.get('token')
-        },
-        headers: {
-          "Access-Control-Allow-Origin": '*', "Access-Control-Allow-Methods": 'POST,GET,PUT,DELETE', 'Access-Control-Allow-Headers': 'Authorization, Lang'
-        },
-        dataType: 'text',
-        success: function (data) {
+      axios.post("/api/getData", {
+        pname: this.cookie.get('pname'),
+        token: this.cookie.get('token'
+        )
+      })
+        .then(data => {
           const variables = {};
           data = JSON.parse(data);
           // console.log(data);
@@ -59,8 +52,7 @@ class Dashboard extends Component {
           } catch (e) {
             this.setState({ data: { "No Data": "For " + this.cookie.get('pname') } });
           }
-        }.bind(this),
-      });
+        }).bind(this);
     } catch (e) {
       console.error(e);
       this.setState({ data: { "No": "Internet" } });
@@ -103,23 +95,15 @@ class Dashboard extends Component {
   varChange(varArray) {
     try {
       // console.log(this.cookie.get('pname'),this.cookie.get('token'),varArray);
-      $.ajax({
-        url: "/api/addvardata",
-        type: 'post',
-        data: {
-          pname: this.cookie.get('pname'),
-          token: this.cookie.get('token'),
-          variables: JSON.stringify(varArray),
-          clientSet: true
-        },
-        headers: {
-          "Access-Control-Allow-Origin": '*', "Access-Control-Allow-Methods": 'POST,GET,PUT,DELETE', 'Access-Control-Allow-Headers': 'Authorization, Lang'
-        },
-        dataType: 'text',
-        success: function (data) {
+      axios.post("/api/addvardata", {
+        pname: this.cookie.get('pname'),
+        token: this.cookie.get('token'),
+        variables: JSON.stringify(varArray),
+        clientSet: true
+      })
+        .then(data => {
           return true;
-        },
-      });
+        })
     } catch (e) {
       console.error(e);
       return false;

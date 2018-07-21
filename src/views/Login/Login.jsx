@@ -3,7 +3,7 @@ import { Form, FormGroup, ControlLabel, FormControl } from "react-bootstrap";
 import "./Login.css";
 import Button from "components/CustomButton/CustomButton";
 import { Card } from "components/Card/Card.jsx";
-import $ from 'jquery';
+import axios from 'axios';
 
 
 class Login extends Component {
@@ -31,25 +31,18 @@ class Login extends Component {
   }
   register() {
     console.log('register pressed');
-    $.ajax({
-      url: "/api/user",
-      type: 'post',
-      data: {
-        email: this.state.email,
-        password: this.state.password
-      },
-      headers: {
-        
-      },
-      dataType: 'text',
-      success: function (data) {
+    axios.post(`/api/user`, {
+      email: this.state.email,
+      password: this.state.password
+    })
+      .then(data => {
         try {
           data = JSON.parse(data);
           console.log(data);
           if (data.email) {
             window.sessionStorage.setItem("email", data.email);
-            this.cookies.set('email', data.email, { path: '/'});
-            this.cookies.set('loggedIn', true, { path: '/'});
+            this.cookies.set('email', data.email, { path: '/' });
+            this.cookies.set('loggedIn', true, { path: '/' });
             this.props.loginStateChange(true);
           } else {
             console.log("User Already exists !")
@@ -57,31 +50,22 @@ class Login extends Component {
         } catch (e) {
           console.error("Error Registering in check Connection!");
         }
-      }.bind(this),
-    });
+      });
   }
   handleSubmit = event => {
     event.preventDefault();
     window.sessionStorage.setItem("isLoggedIn", true);
-
-    $.ajax({
-      url: "/api/login",
-      type: 'post',
-      data: {
-        email: this.state.email,
-        password: this.state.password
-      },
-      headers: {
-        "Access-Control-Allow-Origin": '*',
-        "Access-Control-Allow-Methods": 'POST,GET,PUT,DELETE',
-        'Access-Control-Allow-Headers': 'Authorization, Lang'      },
-      dataType: 'text',
-      success: function (data) {
+    axios.post(`/api/login`, {
+      email: this.state.email,
+      password: this.state.password
+    })
+      .then(data => {
         try {
-          data = JSON.parse(data);
-          if (data.user) {
-            this.cookies.set('email', data.user.email, { path: '/'});
-            this.cookies.set('loggedIn', true, { path: '/'});
+          console.log(data);
+          // data = JSON.parse(data);
+          if (data.userDetails) {
+            this.cookies.set('email', data.userDetails.email, { path: '/' });
+            this.cookies.set('loggedIn', true, { path: '/' });
 
             window.sessionStorage.setItem("email", data.user.email);
             this.props.loginStateChange(true);
@@ -91,8 +75,7 @@ class Login extends Component {
         } catch (e) {
           console.error("Error Logging in check Connection!");
         }
-      }.bind(this),
-    });
+      });
     // this.props.loginStateChange(true);
   }
 
@@ -120,25 +103,25 @@ class Login extends Component {
                     type="password"
                   />
                 </FormGroup>
-                  <Button
+                <Button
                   block
-                    fill
-                    bsSize="large"
-                    bsStyle="success"
-                    disabled={!this.validateForm()}
-                    type="submit"
-                  >
-                    Login
+                  fill
+                  bsSize="large"
+                  bsStyle="success"
+                  disabled={!this.validateForm()}
+                  type="submit"
+                >
+                  Login
                   </Button>
-                  <Button
+                <Button
                   block
-                    fill
-                    bsSize="large"
-                    bsStyle="warning"
-                    disabled={!this.validateForm()}
-                    onClick={() => { this.register() }}
-                  >
-                    Register
+                  fill
+                  bsSize="large"
+                  bsStyle="warning"
+                  disabled={!this.validateForm()}
+                  onClick={() => { this.register() }}
+                >
+                  Register
                   </Button>
 
               </div>
