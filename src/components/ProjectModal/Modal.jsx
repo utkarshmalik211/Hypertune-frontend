@@ -114,15 +114,16 @@ class ProjectModal extends Component {
     $.ajax({
       url: "/api/findProjects",
       type: 'post',
-      data: JSON.stringify({
+      data: {
         email: this.cookie.get('email')
-      }),
+      },
       //  //  headers: {
         
       // },
       dataType: 'json',
       success: function (data, textStatus, xhr) {
-        data = JSON.parse(data);
+        // console.log(typeof data);
+        // data = JSON.parse(data);
         if (data === []) {
           this.showNotification(4, "User "+this.cookie.get('email')+" has no projects");
         } else {

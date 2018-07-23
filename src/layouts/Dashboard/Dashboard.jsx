@@ -20,16 +20,21 @@ class Dashboard extends Component {
 
     this.projectListUpdated = this.projectListUpdated.bind(this);
     // this.handleLogout = this.handleLogout.bind(this);
+    this.cookies = new Cookies();
     try {
       this.socket = io('/', { 'transports': ['websocket'] });
-      this.socket.on('connect', timestamp => console.log("SocketConnected!"));
+      this.socket.on('connect', ()=>{
+        if(this.cookies.get('email') && this.cookies.get('pname')) {
+          console.log("RoomSelected:",this.cookies.get('pname')+"_"+this.cookies.get('email'))
+          this.socket.emit('room', this.cookies.get('pname')+"_"+this.cookies.get('email'))
+        }
+      });
     } catch (e) {
       console.info("Network Down");
     }
-    this.cookies = new Cookies();
-    window.sessionStorage.setItem("isLoggedIn", false);
-    window.sessionStorage.setItem("pname","rohs");
-    window.sessionStorage.setItem("token", "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6I…TU2fQ.SmgurQ3GowE36emJg_cLg_gLsVIVP2xl4BqS8MV2ghY");
+    // window.sessionStorage.setItem("isLoggedIn", false);
+    // window.sessionStorage.setItem("pname","rohs");
+    // window.sessionStorage.setItem("token", "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6I…TU2fQ.SmgurQ3GowE36emJg_cLg_gLsVIVP2xl4BqS8MV2ghY");
     
     // this.socket = io('//',{'transports': ['websocket']});
     this.state = {

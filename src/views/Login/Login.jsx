@@ -60,21 +60,21 @@ class Login extends Component {
       password: this.state.password
     })
       .then(data => {
-        try {
-          console.log(data);
+        // try {
+          console.log(typeof data);
           // data = JSON.parse(data);
           if (data.data.userDetails) {
             this.cookies.set('email', data.data.userDetails.email, { path: '/' });
             this.cookies.set('loggedIn', true, { path: '/' });
 
-            window.sessionStorage.setItem("email", data.user.email);
+            // window.sessionStorage.setItem("email", data.user.email);
             this.props.loginStateChange(true);
           } else {
             console.info("Bad email password combo");
           }
-        } catch (e) {
-          console.error("Error Logging in check Connection!");
-        }
+        // } catch (e) {
+        //   console.error("Error Logging in check Connection!");
+        // }
       });
     // this.props.loginStateChange(true);
   }

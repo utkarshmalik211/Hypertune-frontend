@@ -34,17 +34,16 @@ class Dashboard extends Component {
     try {
       axios.post("/api/getData", {
         pname: this.cookie.get('pname'),
-        token: this.cookie.get('token'
-        )
+        token: this.cookie.get('token')
       })
         .then(data => {
           const variables = {};
-          data = JSON.parse(data);
+          // data = JSON.parse(data);
           // console.log(data);
           try {
-            for (const i in data.data.variables) {
-              if (data.data.variables[i]) {
-                variables[i] = data.data.variables[i];
+            for (const i in data.data.data.variables) {
+              if (data.data.data.variables[i]) {
+                variables[i] = data.data.data.variables[i];
                 // console.log(variables[i]);
               }
             }
@@ -52,7 +51,7 @@ class Dashboard extends Component {
           } catch (e) {
             this.setState({ data: { "No Data": "For " + this.cookie.get('pname') } });
           }
-        }).bind(this);
+        });
     } catch (e) {
       console.error(e);
       this.setState({ data: { "No": "Internet" } });
@@ -116,19 +115,21 @@ class Dashboard extends Component {
         <Grid fluid>
           <Row>
             {Object.keys(this.state.data).map(function (key, index) {
-              return (
-                <Col key={key} lg={3} sm={6}>
-                  <StatsCard key={key}
-                    bigIcon={<i key={key} className="pe-7s-wallet text-success" />}
-                    statsText={key}
-                    statsValue={this.state.data[key]}
-                    statsIcon={<i key={key} className="fa fa-calendar-o" />}
-                    statsIconText="Last day"
-                    edit={true}
-                    handleUpdate={this.handleUpdate}
-                  />
-                </Col>
-              )
+              if (!key.startsWith('__')) {
+                return (
+                  <Col key={key} lg={3} sm={6}>
+                    <StatsCard key={key}
+                      bigIcon={<i key={key} className="pe-7s-server text-success" />}
+                      statsText={key}
+                      statsValue={this.state.data[key]}
+                      statsIcon={<i key={key} className="fa pe-7s-portfolio" />}
+                      statsIconText={"Data type:  "+this.state.data['__' + key]}
+                      edit={true}
+                      handleUpdate={this.handleUpdate}
+                    />
+                  </Col>
+                )
+              }
             }.bind(this))}
           </Row>
           <Row>
