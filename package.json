@@ -38,14 +38,6 @@
       "pathRewrite": {
         "^/api": "/"
       }
-    },
-    "/socket.io": {
-      "target": "http://localhost:1337",
-      "ws": true,
-      "secure": false,
-      "pathRewrite": {
-        "^/socket.io/": "/socket.io/"
-      }
     }
   }
 }

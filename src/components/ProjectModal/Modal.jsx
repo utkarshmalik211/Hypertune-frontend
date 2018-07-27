@@ -170,7 +170,6 @@ class ProjectModal extends Component {
     if (this.socketRoom !== undefined) {
       this.socket.emit('leave-room', this.socketRoom);
       console.info("Socket Left", this.socketRoom);
-
     }
     this.cookie.set('pname',pname);
     this.cookie.set('token',token);
@@ -178,7 +177,7 @@ class ProjectModal extends Component {
     this.socket.emit('room', this.socketRoom);
     console.log(typeof this.props.projectsUpdated);
     this.props.projectsUpdated(this.state.projects);
-    console.info("Socket Joined Room: ", this.socketRoom);
+    console.log("Socket Joined Room: ", this.socketRoom);
     this.handleClose();
   }
 
