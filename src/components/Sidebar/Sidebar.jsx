@@ -3,7 +3,7 @@ import { NavLink } from "react-router-dom";
 import HeaderLinks from "../Header/HeaderLinks.jsx";
 import { Nav } from 'react-bootstrap';
 import imagine from "assets/img/sidebar-5.jpg";
-import logo from "assets/img/ht512.png";
+import logo from "assets/img/ht192.png";
 import dashboardRoutes from "routes/dashboard.jsx";
 import ProjectModal from 'components/ProjectModal/Modal';
 

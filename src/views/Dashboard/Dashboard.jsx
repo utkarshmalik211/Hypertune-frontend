@@ -1,20 +1,20 @@
 import React, { Component } from "react";
-import ChartistGraph from "react-chartist";
+// import ChartistGraph from "react-chartist";
 import { Grid, Row, Col } from "react-bootstrap";
 import axios from 'axios';
-import { Card } from "components/Card/Card.jsx";
+import { TaskCard } from "components/Card/TaskCard.jsx";
 import { StatsCard } from "components/StatsCard/StatsCard.jsx";
 import { Tasks } from "components/Tasks/Tasks.jsx";
 import NotificationSystem from "react-notification-system";
 import {
-  dataSales,
-  optionsSales,
-  responsiveSales,
-  legendSales,
-  dataBar,
-  optionsBar,
-  responsiveBar,
-  legendBar,
+  // dataSales,
+  // optionsSales,
+  // responsiveSales,
+  // legendSales,
+  // dataBar,
+  // optionsBar,
+  // responsiveBar,
+  // legendBar,
   style
 } from "variables/Variables.jsx";
 
@@ -123,7 +123,7 @@ class Dashboard extends Component {
                       statsText={key}
                       statsValue={this.state.data[key]}
                       statsIcon={<i key={key} className="fa pe-7s-portfolio" />}
-                      statsIconText={"Data type:  "+this.state.data['__' + key]}
+                      statsIconText={"Data type:  " + this.state.data['__' + key]}
                       edit={true}
                       handleUpdate={this.handleUpdate}
                     />
@@ -133,64 +133,16 @@ class Dashboard extends Component {
             }.bind(this))}
           </Row>
           <Row>
-            <Col md={8}>
-              <Card
-                statsIcon="fa fa-history"
-                id="chartHours"
-                title="Users Behavior"
-                category="24 Hours performance"
-                stats="Updated 3 minutes ago"
-                content={
-                  <div className="ct-chart">
-                    <ChartistGraph
-                      data={dataSales}
-                      type="Line"
-                      options={optionsSales}
-                      responsiveOptions={responsiveSales}
-                    />
-                  </div>
-                }
-                legend={
-                  <div className="legend">{this.createLegend(legendSales)}</div>
-                }
-              />
-            </Col>
-          </Row>
-
-          <Row>
             <Col md={6}>
-              <Card
-                id="chartActivity"
-                title="2014 Sales"
-                category="All products including Taxes"
-                stats="Data information certified"
-                statsIcon="fa fa-check"
-                content={
-                  <div className="ct-chart">
-                    <ChartistGraph
-                      data={dataBar}
-                      type="Bar"
-                      options={optionsBar}
-                      responsiveOptions={responsiveBar}
-                    />
-                  </div>
-                }
-                legend={
-                  <div className="legend">{this.createLegend(legendBar)}</div>
-                }
-              />
-            </Col>
-
-            <Col md={6}>
-              <Card
+              <TaskCard
                 title="Tasks"
-                category="Backend development"
+                category={this.cookie.get('pname')+" development"}
                 stats="Updated 3 minutes ago"
-                statsIcon="fa fa-history"
+                statsIcon="pe-7s-helm"
                 content={
                   <div className="table-full-width">
                     <table className="table">
-                      <Tasks />
+                      <Tasks cookie = {this.cookie}/>
                     </table>
                   </div>
                 }
