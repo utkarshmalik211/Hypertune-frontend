@@ -22,7 +22,7 @@ class Dashboard extends Component {
     // this.handleLogout = this.handleLogout.bind(this);
     this.cookies = new Cookies();
     try {
-      this.socket = io('http://localhost:1337', { 'transports': ['websocket'] });
+      this.socket = io('https://hypertune-backend.herokuapp.com', { 'transports': ['websocket'] });
       this.socket.on('confirm', ()=>{
         console.log('connected');
         if(this.cookies.get('email') && this.cookies.get('pname')) {
