@@ -14,7 +14,7 @@ export class Tasks extends Component {
     this.handleTick = this.handleTick.bind(this);
     this.state = {
       value: '',
-      tasks: ["loading"]
+      tasks: {"Loading":true}
     }
   }
   handleChange = event => {
@@ -29,7 +29,6 @@ export class Tasks extends Component {
         pname: this.cookie.get('pname'),
         token: this.cookie.get('token'),
         email: this.cookie.get('email'),
-        taskCount: this.state.taskCount,
         tasks: JSON.stringify(this.state.tasks)
       })
         .then(data => {
@@ -54,7 +53,6 @@ export class Tasks extends Component {
         pname: this.cookie.get('pname'),
         token: this.cookie.get('token'),
         email: this.cookie.get('email'),
-        taskCount: this.state.taskCount - 1,
         tasks: JSON.stringify(this.state.tasks)
       })
         .then(data => {
@@ -85,6 +83,9 @@ export class Tasks extends Component {
   addTasks() {
     try {
       if (this.state.value !== '') {
+        if(this.state.tasks["No Data"] === false){
+          delete this.state.tasks["No Data"];
+        }
         // this.state.tasks.push(this.state.value);
         this.state.tasks[this.state.value] = false;
         this.setState({ tasks: this.state.tasks });
@@ -92,7 +93,6 @@ export class Tasks extends Component {
           pname: this.cookie.get('pname'),
           token: this.cookie.get('token'),
           email: this.cookie.get('email'),
-          taskCount: this.state.taskCount + 1,
           tasks: JSON.stringify(this.state.tasks),
         })
           .then(data => {
@@ -118,16 +118,10 @@ export class Tasks extends Component {
     })
       .then(data => {
         if (data.data === 'no tasks') {
-          this.setState({ tasks: ["No Data For " + this.cookie.get('pname')] });
+          this.setState({ tasks: {"No Data":false} });
         }
         else {
-          // console.log(data);
-          let count = 0;
-          for (const i in data.data) {
-            count += 1;
-            // console.log(i);
-          }
-          this.setState({ taskCount: count, tasks: data.data });
+          this.setState({ tasks: data.data });
         }
       });
     } catch (e) {
