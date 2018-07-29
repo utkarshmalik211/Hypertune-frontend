@@ -6,6 +6,7 @@ import Cookies from 'universal-cookie';
 import Header from "components/Header/Header";
 import Footer from "components/Footer/Footer";
 import Sidebar from "components/Sidebar/Sidebar";
+import imagine from "assets/img/sidebar-7.jpg";
 
 import { style } from "variables/Variables.jsx";
 
@@ -152,12 +153,15 @@ class Dashboard extends Component {
   render() {
     let element;
     const isLoggedIn = this.state.isLoggedIn;
+    const color = {
+      backgroundImage: "url(" + imagine + ")"
+    };
     if (isLoggedIn === true) {
       element =
         <div className="wrapper">
           <NotificationSystem ref="notificationSystem" style={style} />
           <Sidebar {...this.props} socket={this.socket} projectupdate = {this.projectListUpdated} cookie={this.cookies} loginStateChange={this.loginStateChange}/>
-          <div id="main-panel" className="main-panel" ref="mainPanel">
+          <div id="main-panel" className="main-panel" ref="mainPanel" style={color}>
             <Header {...this.props} isLoggedIn={isLoggedIn}  cookies={this.cookies } loginStateChange={this.loginStateChange}/>
             <Switch>
               {dashboardRoutes.map((prop, key) => {

@@ -3,8 +3,11 @@ import { Grid } from "react-bootstrap";
 
 class Footer extends Component {
   render() {
+    var color = {
+      backgroundColor: '#222',
+    }
     return (
-      <footer className="footer">
+      <footer className="footer" style={color}>
         <Grid fluid>
           <nav className="pull-left">
             <ul>
