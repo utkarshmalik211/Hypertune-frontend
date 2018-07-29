@@ -195,7 +195,7 @@ class ProjectModal extends Component {
             <NotificationSystem ref="notificationSystem" style={style} />
             <Modal.Header closeButton>
               <Modal.Title><center>Project Selection</center></Modal.Title>
-    AudioListener        </Modal.Header>
+            </Modal.Header>
             <Modal.Body>
               <p>Click on project to select it.</p>
               <Table hover responsive>

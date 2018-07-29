@@ -41,7 +41,7 @@ class Dashboard extends Component {
 
   }
   projectListUpdated(project){
-    console.log('This should update my children!');
+    // console.log('This should update my children!');
     this.setState({projects: project});
   }
   loginStateChange(val) {

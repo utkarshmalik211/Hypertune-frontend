@@ -80,7 +80,9 @@ class Dashboard extends Component {
   // componentWillUpdate(){
   //   this.updateData();
   // }
-
+  componentWillReceiveProps(nextProps) {
+    this.updateData();
+  }
   createLegend(json) {
     var legend = [];
     for (var i = 0; i < json["names"].length; i++) {

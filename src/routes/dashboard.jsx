@@ -1,6 +1,6 @@
 import Dashboard from "views/Dashboard/Dashboard";
-import UserProfile from "views/UserProfile/UserProfile";
-import Notifications from "views/Notifications/Notifications";
+// import UserProfile from "views/UserProfile/UserProfile";
+// import Notifications from "views/Notifications/Notifications";
 
 // import Typography from "views/Typography/Typography";
 // import Icons from "views/Icons/Icons";
