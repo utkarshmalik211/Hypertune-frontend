@@ -65,13 +65,16 @@ class Header extends Component {
     return name;
   }
   render() {
+    var color = {
+      backgroundColor: "transparent"
+    }
     let element;
     const isLoggedIn = this.props.isLoggedIn;
     if (isLoggedIn) {
       element = (
-        <Navbar inverse fluid>
+        <Navbar fluid   style={color}>
           <Navbar.Header>
-            <Navbar.Brand>
+            <Navbar.Brand >
               <a href="/">{this.getBrand()}</a>
             </Navbar.Brand>
             <Navbar.Toggle onClick={this.mobileSidebarToggle} />
@@ -84,7 +87,7 @@ class Header extends Component {
     }
     else if (!isLoggedIn) {
       element = (
-        <Navbar transparent="true" inverse fixedTop>
+        <Navbar style={color}  fixedTop>
           <Navbar.Header>
             <Navbar.Brand>
               <a href="/">{"HyperTune"}</a>

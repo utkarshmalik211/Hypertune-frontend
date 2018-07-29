@@ -4,7 +4,7 @@ import { Grid } from "react-bootstrap";
 class Footer extends Component {
   render() {
     var color = {
-      backgroundColor: '#222',
+      backgroundColor: "transparent"
     }
     return (
       <footer className="footer" style={color}>
