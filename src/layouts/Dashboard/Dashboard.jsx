@@ -34,11 +34,6 @@ class Dashboard extends Component {
     } catch (e) {
       console.info("Network Down");
     }
-    // window.sessionStorage.setItem("isLoggedIn", false);
-    // window.sessionStorage.setItem("pname","rohs");
-    // window.sessionStorage.setItem("token", "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6I…TU2fQ.SmgurQ3GowE36emJg_cLg_gLsVIVP2xl4BqS8MV2ghY");
-    
-    // this.socket = io('//',{'transports': ['websocket']});
     this.state = {
       _notificationSystem: null,
       isLoggedIn: false,
@@ -161,7 +156,7 @@ class Dashboard extends Component {
       element =
         <div className="wrapper">
           <NotificationSystem ref="notificationSystem" style={style} />
-          <Sidebar {...this.props} socket={this.socket} projectupdate = {this.projectListUpdated} cookie={this.cookies}/>
+          <Sidebar {...this.props} socket={this.socket} projectupdate = {this.projectListUpdated} cookie={this.cookies} loginStateChange={this.loginStateChange}/>
           <div id="main-panel" className="main-panel" ref="mainPanel">
             <Header {...this.props} isLoggedIn={isLoggedIn}  cookies={this.cookies } loginStateChange={this.loginStateChange}/>
             <Switch>

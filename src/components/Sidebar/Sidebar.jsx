@@ -1,8 +1,7 @@
 import React, { Component } from "react";
 import { NavLink } from "react-router-dom";
-import HeaderLinks from "../Header/HeaderLinks.jsx";
-import { Nav } from 'react-bootstrap';
-import imagine from "assets/img/sidebar-5.jpg";
+import { Nav, Button } from 'react-bootstrap';
+import imagine from "assets/img/back.jpg";
 import logo from "assets/img/ht192.png";
 import dashboardRoutes from "routes/dashboard.jsx";
 import ProjectModal from 'components/ProjectModal/Modal';
@@ -10,13 +9,22 @@ import ProjectModal from 'components/ProjectModal/Modal';
 class Sidebar extends Component {
   constructor(props) {
     super(props);
+    this.handleLogout = this.handleLogout.bind(this);
     this.state = {
       width: window.innerWidth,
     };
     this.socket = this.props.socket;
     this.cookie = this.props.cookie;
   }
-  
+  handleLogout(val) {
+    console.log('Bbie!');
+    this.cookie.set('email', '');
+    this.cookie.set('loggedIn', false)
+    this.cookie.set('pname', '');
+    this.cookie.set('token', '');
+    // this.props.cookies.set('email','');
+    this.props.loginStateChange(val);
+  }
   activeRoute(routeName) {
     return this.props.location.pathname.indexOf(routeName) > -1 ? "active" : "";
   }
@@ -58,7 +66,6 @@ class Sidebar extends Component {
         </div>
         <div className="sidebar-wrapper">
           <ul className="nav">
-            {this.state.width <= 991 ? <HeaderLinks /> : null}
             {dashboardRoutes.map((prop, key) => {
               if (!prop.redirect)
                 return (
@@ -84,9 +91,19 @@ class Sidebar extends Component {
             })}
             <li>
               <Nav>
-                <ProjectModal socket={this.socket} projectsUpdated={this.props.projectupdate} cookie={this.cookie}/>
+                <ProjectModal socket={this.socket} projectsUpdated={this.props.projectupdate} cookie={this.cookie} />
               </Nav>
             </li>
+            {this.state.width <= 991 ? <li className={"active active-pro"}>
+              <Nav>
+                <center>
+                  <Button  bsSize="large" bsStyle="warning" onClick={()=>this.handleLogout(false)} active>
+                    Logout
+                  </Button>
+                </center>
+              </Nav>
+            </li> : null}
+            
           </ul>
         </div>
       </div>

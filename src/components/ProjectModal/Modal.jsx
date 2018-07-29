@@ -90,14 +90,11 @@ class ProjectModal extends Component {
     $.ajax({
       url: "/api/deleteProject",
       type: 'post',
-      data: JSON.stringify({
+      data: {
         token: token,
         pname: pname,
         email: this.cookie.get('email'),
-      }),
-      //  //  headers: {
-        
-      // },
+      },
       dataType: 'json',
       success: function (data, textStatus, xhr) {
         console.log(xhr.status);
@@ -117,9 +114,6 @@ class ProjectModal extends Component {
       data: {
         email: this.cookie.get('email')
       },
-      //  //  headers: {
-        
-      // },
       dataType: 'json',
       success: function (data, textStatus, xhr) {
         // console.log(typeof data);
@@ -139,13 +133,10 @@ class ProjectModal extends Component {
       $.ajax({
         url: "/api/createProject",
         type: 'post',
-        data: JSON.stringify({
+        data: {
           email: this.cookie.get('email'),
           pname: pname
-        }),
-        //  //  headers: {
-          
-        // },
+        },
         dataType: 'json',
         success: function (data, textStatus, xhr) {
           console.log(xhr.status);
@@ -185,11 +176,12 @@ class ProjectModal extends Component {
     this.setState({ show: false });
   }
 
-  handleShow() {
+  handleShow(e) {
+    e.preventDefault();
     this.setState({ show: true });
   }
   handleChange(e) {
-    console.log(e.target.value);
+    // console.log(e.target.value);
     this.setState({ value: e.target.value });
   }
   render() {

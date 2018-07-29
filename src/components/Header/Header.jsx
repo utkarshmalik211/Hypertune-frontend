@@ -18,7 +18,9 @@ class Header extends Component {
     console.log('Bbie!');
     this.props.cookies.set('email','');
     this.props.cookies.set('loggedIn',false)
-
+    this.props.cookies.set('pname','');
+    this.props.cookies.set('token','');
+    // this.props.cookies.set('email','');
     this.props.loginStateChange(val);
   }
   mobileSidebarToggle(e) {

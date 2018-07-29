@@ -5,7 +5,6 @@ import Button from "components/CustomButton/CustomButton";
 import { Card } from "components/Card/Card.jsx";
 import axios from 'axios';
 
-
 class Login extends Component {
   constructor(props) {
     super(props);
@@ -37,12 +36,10 @@ class Login extends Component {
     })
       .then(data => {
         try {
-          data = JSON.parse(data);
           console.log(data);
-          if (data.email) {
-            window.sessionStorage.setItem("email", data.email);
-            this.cookies.set('email', data.email, { path: '/' });
-            this.cookies.set('loggedIn', true, { path: '/' });
+          if (data.data.email) {
+            this.cookies.set('email', data.data.email);
+            this.cookies.set('loggedIn', true);
             this.props.loginStateChange(true);
           } else {
             console.log("User Already exists !")
