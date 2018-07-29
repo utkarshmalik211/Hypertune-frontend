@@ -186,58 +186,58 @@ class ProjectModal extends Component {
     const tooltip = (token) => { return <Tooltip placement="top" id="modal-tooltip">{token}</Tooltip> };
     return (
       <li>
-      <NavLink to={'#'} onClick={() => this.handleShow(true)}>
-        <i className={"pe-7s-wallet"} onClick={() => this.handleShow(true)} />
-        <p>{"Projects"}</p>
+        <NavLink to={'#'} onClick={() => this.handleShow(true)}>
+          <i className={"pe-7s-wallet"} onClick={() => this.handleShow(true)} />
+          <p>{"Projects"}</p>
         </NavLink>
+        <NotificationSystem ref="notificationSystem" style={style} />
 
-          <Modal show={this.state.show} onHide={this.handleClose} animation autoFocus={true} enforceFocus={true} backdrop={'static'}>
-            <NotificationSystem ref="notificationSystem" style={style} />
-            <Modal.Header closeButton>
-              <Modal.Title><center>Project Selection</center></Modal.Title>
-            </Modal.Header>
-            <Modal.Body>
-              <p>Click on project to select it.</p>
-              <Table hover responsive>
-                <thead>
-                  <tr>
-                    <th>Project Name</th>
-                    <th>Token</th>
-                    <th>Delete</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {
-                    this.state.projects.map((project) => {
-                      return (<tr key={project.token} onClick={() => this.projectNameSelect(project.token, project.projectName)}>
-                        <td key={1}><a>{project.projectName}</a></td>
-                        <td key={2}>
-                          <OverlayTrigger key={2.1} overlay={tooltip(project.token)}>
-                            <a href="#tooltip" key={2.2}>Token</a>
-                          </OverlayTrigger>
-                        </td>
-                        <td key={3}><Button key={3.1} bsSize="small" bsStyle="danger" onClick={(event) => this.deleteProject(event, project.projectName, project.token)}>
-                          Delete
+        <Modal show={this.state.show} onHide={this.handleClose} animation autoFocus={true} enforceFocus={true} backdrop={'static'}>
+          <Modal.Header closeButton>
+            <Modal.Title><center>Project Selection</center></Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            <p>Click on project to select it.</p>
+            <Table hover responsive>
+              <thead>
+                <tr>
+                  <th>Project Name</th>
+                  <th>Token</th>
+                  <th>Delete</th>
+                </tr>
+              </thead>
+              <tbody>
+                {
+                  this.state.projects.map((project) => {
+                    return (<tr key={project.token} onClick={() => this.projectNameSelect(project.token, project.projectName)}>
+                      <td key={1}><a>{project.projectName}</a></td>
+                      <td key={2}>
+                        <OverlayTrigger key={2.1} overlay={tooltip(project.token)}>
+                          <a href="#tooltip" key={2.2}>Token</a>
+                        </OverlayTrigger>
+                      </td>
+                      <td key={3}><Button key={3.1} bsSize="small" bsStyle="danger" onClick={(event) => this.deleteProject(event, project.projectName, project.token)}>
+                        Delete
                         </Button></td>
-                      </tr>
-                      )
-                    })
-                  }
-                  <tr>
-                    <td><FormControl type="text" value={this.state.value} placeholder="Project Name" onChange={this.handleChange} /></td>
-                    <td colSpan={2}><Button bsStyle="info" onClick={() => this.createProject()}>Create and Select</Button></td>
-                  </tr>
-                </tbody>
-              </Table>
-            </Modal.Body>
-            <Modal.Footer>
-              <Button active bsStyle="warning" onClick={() => this.handleClose()}>Close</Button>
-            </Modal.Footer>
-          </Modal>
+                    </tr>
+                    )
+                  })
+                }
+                <tr>
+                  <td><FormControl type="text" value={this.state.value} placeholder="Project Name" onChange={this.handleChange} /></td>
+                  <td colSpan={2}><Button bsStyle="info" onClick={() => this.createProject()}>Create and Select</Button></td>
+                </tr>
+              </tbody>
+            </Table>
+          </Modal.Body>
+          <Modal.Footer>
+            <Button active bsStyle="warning" onClick={() => this.handleClose()}>Close</Button>
+          </Modal.Footer>
+        </Modal>
       </li>
 
-        );
-      }
-    }
-    
-    export default ProjectModal;
+    );
+  }
+}
+
+export default ProjectModal;
