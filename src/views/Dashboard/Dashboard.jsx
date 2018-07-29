@@ -25,7 +25,10 @@ class Dashboard extends Component {
     this.handleUpdate = this.handleUpdate.bind(this);
     this.varChange = this.varChange.bind(this);
     this.state = {
-      data: { "Select": "Project" },
+      data: {
+        "Select": "Project",
+        "__Select": "U"
+      },
     }
     this.cookie = this.props.cookies;
     this.socket = this.props.socket;
@@ -49,7 +52,12 @@ class Dashboard extends Component {
             }
             this.setState({ data: variables });
           } catch (e) {
-            this.setState({ data: { "No Data": "For " + this.cookie.get('pname') } });
+            this.setState({
+              data: {
+                "No Data": "For " + this.cookie.get('pname'),
+                "__No Data": "Undefined"
+              }
+            });
           }
         });
     } catch (e) {
@@ -119,10 +127,10 @@ class Dashboard extends Component {
                 return (
                   <Col key={key} lg={3} sm={6}>
                     <StatsCard key={key}
-                      bigIcon={<i key={key} className="pe-7s-server text-success" />}
+                      bigIcon={<i key={key} className="text-success">{key.charAt(0).toUpperCase()}</i>}
                       statsText={key}
                       statsValue={this.state.data[key]}
-                      statsIcon={<i key={key} className="fa pe-7s-portfolio" />}
+                      statsIcon={<p key={key} className="fa">{this.state.data['__' + key].charAt(0).toUpperCase()}</p>}
                       statsIconText={"Data type:  " + this.state.data['__' + key]}
                       edit={true}
                       handleUpdate={this.handleUpdate}
@@ -136,13 +144,13 @@ class Dashboard extends Component {
             <Col md={6}>
               <TaskCard
                 title="Tasks"
-                category={this.cookie.get('pname')+" development"}
+                category={this.cookie.get('pname') + " development"}
                 stats="Updated 3 minutes ago"
                 statsIcon="pe-7s-helm"
                 content={
                   <div className="table-full-width">
                     <table className="table">
-                      <Tasks cookie = {this.cookie}/>
+                      <Tasks cookie={this.cookie} />
                     </table>
                   </div>
                 }

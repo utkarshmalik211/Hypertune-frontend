@@ -12,6 +12,7 @@ class Sidebar extends Component {
     this.handleLogout = this.handleLogout.bind(this);
     this.state = {
       width: window.innerWidth,
+      modalShow: false
     };
     this.socket = this.props.socket;
     this.cookie = this.props.cookie;
@@ -89,21 +90,19 @@ class Sidebar extends Component {
                 );
               return null;
             })}
-            <li>
-              <Nav>
-                <ProjectModal socket={this.socket} projectsUpdated={this.props.projectupdate} cookie={this.cookie} />
-              </Nav>
-            </li>
-            {this.state.width <= 991 ? <li className={"active active-pro"}>
-              <Nav>
-                <center>
-                  <Button  bsSize="large" bsStyle="warning" onClick={()=>this.handleLogout(false)} active>
-                    Logout
-                  </Button>
-                </center>
-              </Nav>
+            <ProjectModal socket={this.socket} projectsUpdated={this.props.projectupdate} cookie={this.cookie} />
+            {this.state.width <= 991 ? <li className={"active-pro"} key={10}>
+              <NavLink
+                to={"/"}
+                className="nav-link"
+                activeClassName="active"
+                onClick={() => this.handleLogout(false)}
+              >
+                <i className={"pe-7s-delete-user"} />
+                <p>{"Logout"}</p>
+              </NavLink>
             </li> : null}
-            
+
           </ul>
         </div>
       </div>

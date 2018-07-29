@@ -14,12 +14,12 @@ const dashboardRoutes = [
     icon: "pe-7s-graph",
     component: Dashboard
   },
-  {
-    path: "/user",
-    name: "User Profile",
-    icon: "pe-7s-user",
-    component: UserProfile
-  },
+  // {
+  //   path: "/user",
+  //   name: "User Profile",
+  //   icon: "pe-7s-user",
+  //   component: UserProfile
+  // },
   // {
   //   path: "/typography",
   //   name: "Typography",
@@ -28,12 +28,12 @@ const dashboardRoutes = [
   // },
   // { path: "/icons", name: "Icons", icon: "pe-7s-science", component: Icons },
   // { path: "/maps", name: "Maps", icon: "pe-7s-map-marker", component: Maps },
-  {
-    path: "/notifications",
-    name: "Notifications",
-    icon: "pe-7s-bell",
-    component: Notifications
-  },
+  // {
+  //   path: "/notifications",
+  //   name: "Notifications",
+  //   icon: "pe-7s-bell",
+  //   component: Notifications
+  // },
   // {
   //   upgrade: true,
   //   path: "/upgrade",
