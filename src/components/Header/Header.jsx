@@ -66,7 +66,7 @@ class Header extends Component {
   }
   render() {
     var color = {
-      backgroundColor: "transparent"
+      backgroundColor: "transparent",
     }
     let element;
     const isLoggedIn = this.props.isLoggedIn;
@@ -75,7 +75,7 @@ class Header extends Component {
         <Navbar fluid   style={color}>
           <Navbar.Header>
             <Navbar.Brand >
-              <a href="/">{this.getBrand()}</a>
+              <a href="/" style={{color: "white"}}>{this.getBrand()}</a>
             </Navbar.Brand>
             <Navbar.Toggle onClick={this.mobileSidebarToggle} />
           </Navbar.Header>
@@ -90,7 +90,7 @@ class Header extends Component {
         <Navbar style={color}  fixedTop>
           <Navbar.Header>
             <Navbar.Brand>
-              <a href="/">{"HyperTune"}</a>
+              <h2 href="/" style={{color: "white"}}>{"HyperTune"}</h2>
             </Navbar.Brand>
           </Navbar.Header>
           <Navbar.Collapse>

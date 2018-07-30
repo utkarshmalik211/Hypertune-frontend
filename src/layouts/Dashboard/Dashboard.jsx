@@ -24,12 +24,12 @@ class Dashboard extends Component {
     this.cookies = new Cookies();
     try {
       this.socket = io('https://hypertune-backend.herokuapp.com', { 'transports': ['websocket'] });
-      this.socket.on('confirm', ()=>{
+      this.socket.on('confirm', () => {
         console.log('connected');
-        if(this.cookies.get('email') && this.cookies.get('pname')) {
+        if (this.cookies.get('email') && this.cookies.get('pname')) {
 
-          console.log("RoomSelected:",this.cookies.get('pname')+"_"+this.cookies.get('email'))
-          this.socket.emit('room', this.cookies.get('pname')+"_"+this.cookies.get('email'))
+          console.log("RoomSelected:", this.cookies.get('pname') + "_" + this.cookies.get('email'))
+          this.socket.emit('room', this.cookies.get('pname') + "_" + this.cookies.get('email'))
         }
       });
     } catch (e) {
@@ -41,12 +41,12 @@ class Dashboard extends Component {
     };
 
   }
-  projectListUpdated(project){
+  projectListUpdated(project) {
     // console.log('This should update my children!');
-    this.setState({projects: project});
+    this.setState({ projects: project });
   }
   loginStateChange(val) {
-    this.setState({isLoggedIn: val});
+    this.setState({ isLoggedIn: val });
   }
   handleNotificationClick(position) {
     var color = Math.floor(Math.random() * 4 + 1);
@@ -155,15 +155,21 @@ class Dashboard extends Component {
     const isLoggedIn = this.state.isLoggedIn;
     const color = {
       backgroundImage: "url(" + imagine + ")",
-      backgroundSize: 'cover'
+      /* Full height */
+      height: "100%",
+      minHeight: '100%',
+      // /* Center and scale the image nicely */
+      // backgroundPosition: "center",
+      backgroundRepeat: "no-repeat",
+      backgroundSize: "cover"
     };
     if (isLoggedIn === true) {
       element =
         <div className="wrapper" style={color}>
           <NotificationSystem ref="notificationSystem" style={style} />
-          <Sidebar {...this.props} socket={this.socket} projectupdate = {this.projectListUpdated} cookie={this.cookies} loginStateChange={this.loginStateChange}/>
+          <Sidebar {...this.props} socket={this.socket} projectupdate={this.projectListUpdated} cookie={this.cookies} loginStateChange={this.loginStateChange} />
           <div id="main-panel" className="main-panel" ref="mainPanel" >
-            <Header {...this.props} isLoggedIn={isLoggedIn}  cookies={this.cookies } loginStateChange={this.loginStateChange}/>
+            <Header {...this.props} isLoggedIn={isLoggedIn} cookies={this.cookies} loginStateChange={this.loginStateChange} />
             <Switch>
               {dashboardRoutes.map((prop, key) => {
                 if (prop.name === "Notifications")
@@ -186,30 +192,30 @@ class Dashboard extends Component {
                     <prop.component
                       {...routeProps}
                       handleClick={this.handleNotificationClick}
-                      project = {this.state.projects}
-                      socket = {this.socket}
-                      cookies={this.cookies }
-                  />)} key={key} />
+                      project={this.state.projects}
+                      socket={this.socket}
+                      cookies={this.cookies}
+                    />)} key={key} />
                 );
               })}
             </Switch>
             <Footer />
           </div>
         </div>
-    }else if (isLoggedIn === false) {
+    } else if (isLoggedIn === false) {
       // this.handleLogin();
       element = <div className="wrapper">
         <NotificationSystem ref="notificationSystem" style={style} />
-          <Header {...this.props} isLoggedIn={false} name="HyperTune"/>
-          <Switch>
+        <Header {...this.props} isLoggedIn={false} name="HyperTune" />
+        <Switch>
           <Route path={'/'} render={routeProps => (
-                    <Login
-                      {...routeProps}
-                      loginStateChange={this.loginStateChange} cookies={this.cookies}
-                  />)} />
-          </Switch>
-          <Footer />
-        </div>
+            <Login
+              {...routeProps}
+              loginStateChange={this.loginStateChange} cookies={this.cookies}
+            />)} />
+        </Switch>
+        <Footer />
+      </div>
     }
     return element
   }

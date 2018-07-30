@@ -45,9 +45,10 @@ class Sidebar extends Component {
       <div
         id="sidebar"
         className="sidebar"
-        data-color="black"
+        data-color="transparent"
         data-image={imagine}
       >
+        
         <div className="sidebar-background" style={sidebarBackground} />
         <div className="logo">
           <a

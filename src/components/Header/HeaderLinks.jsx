@@ -10,7 +10,7 @@ class HeaderLinks extends Component {
       element = <div>
         <Nav>
           <NavItem eventKey={1} href="/dashboard">
-            <i className="fa fa-dashboard" />
+            <i style={{color: "white"}} className="fa fa-dashboard" />
             <p className="hidden-lg hidden-md">Dashboard</p>
           </NavItem>
         </Nav>
@@ -19,7 +19,7 @@ class HeaderLinks extends Component {
             Account
         </NavItem> */}
           <NavItem eventKey={3} onClick={() => { this.props.loginStateChange(false) }}>
-            Log out
+            <p style={{color: "white"}}>Log out</p>
           </NavItem>
         </Nav>
       </div>
